@@ -1,8 +1,10 @@
 # depslib dependency file v1.0
-1501272855 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
+1501277569 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
+	"player.h"
+	<windows.h>
 
 1486739997 c:\users\yoloswag\documents\sjljreee\sfml-2.4.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -396,4 +398,9 @@
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
+
+1501276760 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
+	"player.h"
+
+1501277606 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.h
 
