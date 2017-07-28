@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::string resourcePath = "C:\\Users\\Yoloswag\\Desktop\\";
+    std::string resourcePath = "C:\\Users\\8stev\\Desktop\\NewCode\\JulianStevenDig\\images\\";
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
 
 	window.setFramerateLimit(60);
