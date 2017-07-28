@@ -46,7 +46,7 @@ int main()
 	{
     	sf::Event event;
 
-    	while (windowopengl32.pollEvent(event))
+    	while (window.pollEvent(event))
     	{
         	if (event.type == sf::Event::Closed)
             	window.close();
