@@ -3,10 +3,27 @@
 #include <string>
 //#include "ResourcePath.hpp"
 
+#include <windows.h>
+using namespace std;
+std::string getexepath()
+{
+  char result[ MAX_PATH ];
+  return std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
+}
 
 int main()
 {
-    std::string resourcePath = "C:\\Users\\8stev\\Desktop\\NewCode\\JulianStevenDig\\images\\";
+
+    string imagePath = getexepath();
+    imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
+    imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
+    imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
+    imagePath = imagePath + "\\images\\";
+
+    //C:\Users\Yoloswag\Documents\reee\JulianStevenDig\JulianStevenDig\bin\Debug\JulianStevenDig.exe
+
+
+
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
 
 	window.setFramerateLimit(60);
@@ -15,7 +32,7 @@ int main()
 
 	sf::Texture texture;
 
-	if (!texture.loadFromFile(resourcePath + "gnomechild.png"))
+	if (!texture.loadFromFile(imagePath + "gnomechild.png"))
 	{
     	std::cout << "reeeeeee file path " << std::endl;
 	}
@@ -29,7 +46,7 @@ int main()
 	{
     	sf::Event event;
 
-    	while (window.pollEvent(event))
+    	while (windowopengl32.pollEvent(event))
     	{
         	if (event.type == sf::Event::Closed)
             	window.close();
@@ -66,6 +83,7 @@ int main()
     	window.display();
 
     	std::cout << 1.0f / time.asSeconds() << std::endl; //Prints the frame rate to the console.
+
 	}
 }
 
