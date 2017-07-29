@@ -9,6 +9,7 @@ using namespace std;
 
 
 void doBoundariesStuff();
+void doAnimationStuff(int);
 player steven;
 
 
@@ -28,8 +29,9 @@ string imagePath = getexepath();
     imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
     imagePath = imagePath + "\\images\\";
 
-    steven.loadTexture(imagePath + "gnomechild.png");
-
+    steven.loadTexture(imagePath + "SurfaceSpriteSheet1.png");
+    steven.updateTexture(10000);
+    steven.sprite.setScale(8,8);
 
 
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
@@ -55,6 +57,7 @@ string imagePath = getexepath();
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     	{
         	steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
+        	steven.setFacing(true);
     	}
 
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -70,6 +73,7 @@ string imagePath = getexepath();
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     	{
         	steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
+        	steven.setFacing(false);
     	}
 
     	//update his position variables
@@ -77,6 +81,7 @@ string imagePath = getexepath();
     	steven.y = steven.sprite.getPosition().y;
 
     	doBoundariesStuff();
+    	doAnimationStuff(time.asMilliseconds());
 
     	clock.restart().asMilliseconds();
 
@@ -101,6 +106,11 @@ if (steven.y < 0) steven.setPosition(steven.x,0);
 if (steven.y > 600 - height) steven.setPosition(steven.x,600 - height);
 
 
+
+}
+
+void doAnimationStuff(int elapsed) {
+steven.updateTexture(elapsed);
 
 }
 
