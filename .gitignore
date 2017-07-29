@@ -53,5 +53,11 @@ Temporary Items
 obj
 bin
 
+obj\debug
+obj\debug\*
+obj\debug\*.*
 
+bin\debug
+bin\debug\*
+bin\debug\*.*
 

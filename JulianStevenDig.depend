@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1501277666 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
+1501350765 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
@@ -399,8 +399,11 @@
 	<iostream>
 	<string>
 
-1501276760 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
+1501350491 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
 	"player.h"
+	<iostream>
 
-1501277606 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.h
+1501349880 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.h
+	"SFML/Graphics.hpp"
+	<string>
 
