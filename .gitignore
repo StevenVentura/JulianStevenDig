@@ -46,7 +46,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-.layout
-.depend
-.cbp
+*.layout
+*.depend
+*.cbp
+
+obj
+bin
+
+
 
