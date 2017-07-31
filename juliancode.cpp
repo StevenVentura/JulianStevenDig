@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "player.h"
+#include "ground.h"
 //#include "ResourcePath.hpp"
 
 #include <windows.h>
@@ -11,6 +12,7 @@ using namespace std;
 void doBoundariesStuff();
 void doAnimationStuff(int);
 player steven;
+ground layer1;
 
 
 std::string getexepath()
@@ -18,7 +20,6 @@ std::string getexepath()
   char result[ MAX_PATH ];
   return std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
 }
-
 
 
 int main()
@@ -33,6 +34,8 @@ string imagePath = getexepath();
     steven.updateTexture(10000);
     steven.sprite.setScale(8,8);
 
+    layer1.loadTexture(imagePath + "ground.png");
+    layer1.sprite.setScale(8,8);
 
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
 	window.setFramerateLimit(60);
@@ -87,7 +90,10 @@ string imagePath = getexepath();
 
     	window.clear();
 
+    	window.draw(layer1.sprite);
     	window.draw(steven.sprite);
+
+    	layer1.sprite.setPosition(300,300);
 
     	window.display();
 
