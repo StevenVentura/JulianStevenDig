@@ -31,4 +31,4 @@ void ground::loadTexture(string pngPath) {
 	sprite.setTexture(texture);
 
 
-	}
+}

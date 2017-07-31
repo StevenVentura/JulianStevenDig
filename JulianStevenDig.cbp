@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="ground.cpp" />
+		<Unit filename="ground.h" />
 		<Unit filename="juliancode.cpp" />
 		<Unit filename="player.cpp" />
 		<Unit filename="player.h" />

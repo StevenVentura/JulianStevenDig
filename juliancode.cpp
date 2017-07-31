@@ -8,11 +8,13 @@
 #include <windows.h>
 using namespace std;
 
+int tile1 = 14; //if tile1 = 0, then 1 tile will be created. If tile1 = 1, then 2 tiles will be created. Every 5 tiles a new row is created.
+int counting = 0;
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
 player steven;
-ground layer1;
+ground layer1[15]; //must be plus 1 of tile1
 
 
 std::string getexepath()
@@ -34,8 +36,15 @@ string imagePath = getexepath();
     steven.updateTexture(10000);
     steven.sprite.setScale(8,8);
 
-    layer1.loadTexture(imagePath + "ground.png");
-    layer1.sprite.setScale(8,8);
+    for(int x = 0; x <= tile1; x++)
+    {
+        layer1[x].loadTexture(imagePath + "ground.png");
+    }
+
+    for(int x = 0; x <=tile1; x++)
+    {
+        layer1[x].sprite.setScale(8,8);
+    }
 
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
 	window.setFramerateLimit(60);
@@ -90,10 +99,22 @@ string imagePath = getexepath();
 
     	window.clear();
 
-    	window.draw(layer1.sprite);
+        for(int x = 0; x <= tile1; x++)
+        {
+            window.draw(layer1[x].sprite);
+        }
+
     	window.draw(steven.sprite);
 
-    	layer1.sprite.setPosition(300,300);
+        for(int y = 300; y <=(300+(3*128)); y+=128) //3 is the # of rows
+        {
+            for(int x = 64; x <= (5) * 128; x+=128) //5 is the # of tiles per row
+            {
+                layer1[counting].sprite.setPosition(x,y);
+                counting+=1;
+            }
+        }
+        counting = 0;
 
     	window.display();
 
