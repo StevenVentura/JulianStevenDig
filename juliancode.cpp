@@ -91,19 +91,20 @@ string imagePath = getexepath();
 
     	window.display();
 
-
 	}
 }
 
 void doBoundariesStuff() {
-float width = steven.texture.getSize().x;
-float height = steven.texture.getSize().y;
+float width = steven.texture.getSize().x; //170?
+float height = steven.texture.getSize().y; //289 pixels tall? Did you scale the sprite up by 4? 56 pixels works
+
+std::cout << width << endl;
 
 //player
-if (steven.x < 0) steven.setPosition(0,steven.y);
-if (steven.x > 600 - width) steven.setPosition(600 - width,steven.y);
-if (steven.y < 0) steven.setPosition(steven.x,0);
-if (steven.y > 600 - height) steven.setPosition(steven.x,600 - height);
+if (steven.x < steven.width*4) steven.setPosition(steven.width*4,steven.y);
+if (steven.x > 600 - steven.width*4) steven.setPosition(600 - steven.width*4,steven.y);
+if (steven.y < steven.height*4) steven.setPosition(steven.x,steven.height*4);
+if (steven.y > 600 - steven.height*4) steven.setPosition(steven.x,600 - steven.height*4);
 
 
 
