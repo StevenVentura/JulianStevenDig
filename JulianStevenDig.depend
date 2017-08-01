@@ -394,12 +394,13 @@
 	<string>
 	<vector>
 
-1501543838 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
+1501618633 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
 	"player.h"
 	"ground.h"
+	"chest.h"
 	<windows.h>
 
 1501352606 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
@@ -414,15 +415,23 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501376249 source:c:\users\8stev\desktop\newcode\julianstevendig\player.cpp
+1501616554 source:c:\users\8stev\desktop\newcode\julianstevendig\player.cpp
 	"player.h"
 	<iostream>
 
-1501540531 source:c:\users\8stev\desktop\newcode\julianstevendig\ground.cpp
+1501617169 source:c:\users\8stev\desktop\newcode\julianstevendig\ground.cpp
 	"ground.h"
 	<iostream>
 
-1501537218 c:\users\8stev\desktop\newcode\julianstevendig\ground.h
+1501618034 c:\users\8stev\desktop\newcode\julianstevendig\ground.h
+	"SFML/Graphics.hpp"
+	<string>
+
+1501618477 source:c:\users\8stev\desktop\newcode\julianstevendig\chest.cpp
+	"chest.h"
+	<iostream>
+
+1501618350 c:\users\8stev\desktop\newcode\julianstevendig\chest.h
 	"SFML/Graphics.hpp"
 	<string>
 

@@ -1,34 +1,36 @@
-#include "ground.h"
+#include "chest.h"
 #include <iostream>
 
 using namespace std;
 
-ground::ground()
+chest::chest()
 {
     x = 0;
     y = 0;
-    width = 16;
-    height = 16;
+    width = 12;
+    height = 12;
     sprite.setOrigin(width/2,height/2);
+
 }
 
-ground::~ground() {
+chest::~chest()
+{
+
 }
 
-void ground::setPosition(float x, float y) {
-this->x = x;
-this->y = y;
+void chest::setPosition(float x, float y)
+{
+    this->x = x;
+    this->y = y;
 
-sprite.setPosition(x,y);
+    sprite.setPosition(x,y);
 }
 
-void ground::loadTexture(string pngPath) {
+void chest::loadTexture(string pngPath) {
 
     if (!texture.loadFromFile(pngPath))
 	{
     	std::cout << "reeeeeee file path " << std::endl;
 	}
 	sprite.setTexture(texture);
-
-
 }

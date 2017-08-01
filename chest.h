@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-class ground
+class chest
 {
 public:
-    ground();
-    ~ground();
+    chest();
+    ~chest();
 
     void loadTexture(string imagePath);
     void setPosition(float x, float y);
