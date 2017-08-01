@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1501353116 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
+1501623465 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
 	"player.h"
+	"ground.h"
+	"chest.h"
 	<windows.h>
 
 1486739997 c:\users\yoloswag\documents\sjljreee\sfml-2.4.2\include\sfml\graphics.hpp
@@ -403,7 +405,7 @@
 	"chest.h"
 	<windows.h>
 
-1501352606 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
+1501354064 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
 	"player.h"
 	<iostream>
 
@@ -434,4 +436,20 @@
 1501618350 c:\users\8stev\desktop\newcode\julianstevendig\chest.h
 	"SFML/Graphics.hpp"
 	<string>
+
+1501615329 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\ground.h
+	"SFML/Graphics.hpp"
+	<string>
+
+1501615329 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\chest.h
+	"SFML/Graphics.hpp"
+	<string>
+
+1501616783 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\chest.cpp
+	"chest.h"
+	<iostream>
+
+1501615329 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\ground.cpp
+	"ground.h"
+	<iostream>
 

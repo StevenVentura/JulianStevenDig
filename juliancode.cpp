@@ -10,7 +10,6 @@
 using namespace std;
 
 int tile1 = 14; //if tile1 = 0, then 1 tile will be created. If tile1 = 1, then 2 tiles will be created. Every 5 tiles a new row is created.
-int counting = 0;
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
@@ -60,6 +59,7 @@ string imagePath = getexepath();
 	window.setFramerateLimit(60);
 
 	sf::Clock clock;
+	bool firsttime = true;
 
 	while (window.isOpen())
 	{
@@ -114,17 +114,20 @@ string imagePath = getexepath();
             window.draw(layer1[x].sprite);
         }
 
-        for(int y = 300; y <=(300+(3*128)); y+=128) //3 is the # of rows
+        for (int r = 0; r < 3; r++)
         {
-            for(int x = 64; x <= (5) * 128; x+=128) //5 is the # of tiles per row
+            for (int c = 0; c < 5; c++)
             {
-                layer1[counting].sprite.setPosition(x,y);
-                counting+=1;
+                layer1[r*5+c].sprite.setPosition(c*128+64,r*128+300);
+
             }
+
         }
-        counting = 0;
+
+
 
     	window.draw(steven.sprite);
+
     	window.draw(gold.sprite);
 
     	window.display();
