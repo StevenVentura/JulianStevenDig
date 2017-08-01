@@ -4,6 +4,7 @@
 #include "player.h"
 #include "ground.h"
 #include "chest.h"
+#include "Direction.h"
 //#include "ResourcePath.hpp"
 
 #include <windows.h>
@@ -13,11 +14,14 @@ int tile1 = 14; //if tile1 = 0, then 1 tile will be created. If tile1 = 1, then 
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
+void drawHUD();
 
 //CREATING OBJECTS
 player steven;
 ground layer1[15]; //must be plus 1 of tile1
 chest gold;
+sf::Texture HUD;
+sf::Sprite HUDsprite;
 
 
 std::string getexepath()
@@ -39,10 +43,20 @@ string imagePath = getexepath();
     //LOADING SPRITES
     steven.loadTexture(imagePath + "SurfaceSpriteSheet1.png");
     gold.loadTexture(imagePath + "chest.png");
+    //load hud
+    if (!HUD.loadFromFile(imagePath + "HUD.png")){
+        cout << "reeeeeeeeeeeeeeeeeeeee" << endl;
+    }
+
+    HUDsprite.setTexture(HUD);
+
+    HUDsprite.scale(600.0/HUD.getSize().x,600.0/HUD.getSize().x);
+
     for(int x = 0; x <= tile1; x++)
     {
         layer1[x].loadTexture(imagePath + "ground.png");
     }
+
 
     //UPDATING SPRITES
     steven.updateTexture(10000);
@@ -79,23 +93,25 @@ string imagePath = getexepath();
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     	{
         	steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
-        	steven.setFacing(true);
+        	steven.setFacing(Direction::WEST);
     	}
 
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     	{
         	steven.sprite.move(sf::Vector2f(0, -1*steven.base_speed * time.asMilliseconds()));
+        	steven.setFacing(Direction::NORTH);
     	}
 
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     	{
         	steven.sprite.move(sf::Vector2f(0, steven.base_speed * time.asMilliseconds()));
+        	steven.setFacing(Direction::SOUTH);
     	}
 
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     	{
         	steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
-        	steven.setFacing(false);
+        	steven.setFacing(Direction::EAST);
     	}
 
     	//update his position variables
@@ -119,7 +135,6 @@ string imagePath = getexepath();
             for (int c = 0; c < 5; c++)
             {
                 layer1[r*5+c].sprite.setPosition(c*128+64,r*128+300);
-
             }
 
         }
@@ -129,6 +144,9 @@ string imagePath = getexepath();
     	window.draw(steven.sprite);
 
     	window.draw(gold.sprite);
+
+    	window.draw(HUDsprite);
+
 
     	window.display();
 
@@ -151,6 +169,10 @@ if (steven.y > 600 - steven.height*4) steven.setPosition(steven.x,600 - steven.h
 
 void doAnimationStuff(int elapsed) {
 steven.updateTexture(elapsed);
+
+}
+void drawHUD()
+{
 
 }
 

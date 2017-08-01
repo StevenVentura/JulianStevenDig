@@ -1,4 +1,5 @@
 #include "player.h"
+#include "Direction.h"
 #include <iostream>
 using namespace std;
 
@@ -10,6 +11,7 @@ height=14;
 currentSprite = 0;
 spriteCycleCounter = 0;
 spriteCycleSpeed = 200;//milliseconds
+facingDirection = Direction::EAST;
 facingLeft = false;
 
 sprite.setOrigin(width/2,height/2);
@@ -27,16 +29,25 @@ sprite.setPosition(x,y);
 
 }
 
-void player::setFacing(bool left) {
+void player::setFacing(int direction) {
 
-
-if ((facingLeft == false && left) || (facingLeft == true && left==false)) {
+if ((facingLeft == false && direction == Direction::WEST) || (facingLeft == true && direction == Direction::EAST)) {
     sprite.scale(-1,1);
+    facingLeft = (direction == Direction::WEST);
 }
 
-facingLeft = left;
+int please = 1;
+if (facingLeft)
+    please = -1;
 
+if (direction == Direction::NORTH)
+    sprite.setRotation(-90*please);
 
+else if (direction == Direction::SOUTH)
+    sprite.setRotation(90*please);
+    else sprite.setRotation(0);
+
+facingDirection = direction;
 }
 
 void player::loadTexture(string pngPath) {

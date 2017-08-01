@@ -10,7 +10,7 @@ void pls();
 void loadTexture(string imagePath);
 void updateTexture(int elapsed);
 void setPosition(float x, float y);
-void setFacing(bool left);
+void setFacing(int direction);
 
 sf::Sprite sprite;
 sf::Texture texture;
@@ -19,6 +19,7 @@ float width,height;
 int spriteCycleSpeed;
 int spriteCycleCounter;
 int currentSprite;
+int facingDirection;
 bool facingLeft;
 
 const static float base_speed = 0.25;
