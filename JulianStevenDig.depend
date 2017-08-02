@@ -1,13 +1,16 @@
 # depslib dependency file v1.0
-1501625661 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
+1501709042 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
+	"SFML/Audio.hpp"
+	<cmath>
+	<windows.h>
 	<iostream>
 	<string>
+	<math.h>
 	"player.h"
 	"ground.h"
 	"chest.h"
 	"Direction.h"
-	<windows.h>
 
 1486739997 c:\users\yoloswag\documents\sjljreee\sfml-2.4.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -408,7 +411,7 @@
 	"Direction.h"
 	<windows.h>
 
-1501626500 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
+1501708700 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
 	"player.h"
 	"Direction.h"
 	<iostream>
@@ -450,7 +453,7 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501616783 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\chest.cpp
+1501704160 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\chest.cpp
 	"chest.h"
 	<iostream>
 

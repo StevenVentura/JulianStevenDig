@@ -123,6 +123,8 @@ int main()
     rectangle4.setPosition(348,188);
     rectangle4.setRotation(90);
 
+
+
 	while (window.isOpen())
 	{
     	sf::Event event;
@@ -285,6 +287,9 @@ int main()
         window.draw(rectangle2);
         window.draw(rectangle3);
         window.draw(rectangle4);
+sf::FloatRect visibleArea(steven.x-300,steven.y-300,600,600);
+HUDsprite.setPosition(steven.x-300,steven.y-300);
+        window.setView(sf::View(visibleArea));
     	window.display();
 
 	}
