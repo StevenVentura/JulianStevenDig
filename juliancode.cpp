@@ -25,6 +25,8 @@ bool isMoving = false;
 int moveTimer = 0;
 int speedX = 0;
 int speedY = 0;
+float x = 0;
+float y = 0;
 
 //CREATING OBJECTS
 player steven;
@@ -147,8 +149,8 @@ string imagePath = getexepath();
 
         if(isMoving == true)
         {
-            float x = speedX;
-            float y = speedY;
+            x = speedX;
+            y = speedY;
             steven.sprite.move(sf::Vector2f(x/3 * time.asMilliseconds(), y/3 * time.asMilliseconds()));
             moveTimer -= moveSpeed;
             if(moveTimer == 0) isMoving = false;
@@ -191,19 +193,19 @@ string imagePath = getexepath();
         {
             if(steven.facingDirection == Direction::EAST)
             {
-                steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
+                steven.sprite.move(sf::Vector2f((-x/3) * time.asMilliseconds(), 0));
             }
             if(steven.facingDirection == Direction::WEST)
             {
-                steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
+                steven.sprite.move(sf::Vector2f((-x/3) * time.asMilliseconds(), 0));
             }
             if(steven.facingDirection == Direction::NORTH)
             {
-                steven.sprite.move(sf::Vector2f(0, steven.base_speed * time.asMilliseconds()));
+                steven.sprite.move(sf::Vector2f(0, (-y/3) * time.asMilliseconds()));
             }
             if(steven.facingDirection == Direction::SOUTH)
             {
-                steven.sprite.move(sf::Vector2f(0, -1*steven.base_speed * time.asMilliseconds()));
+                steven.sprite.move(sf::Vector2f(0, (-y/3) * time.asMilliseconds()));
             }
             std::cout << "The sprite has collided" << std:: endl;
         }
