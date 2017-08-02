@@ -1,14 +1,15 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
+#include <cmath>
+#include <windows.h>
 #include <iostream>
 #include <string>
+
 #include "player.h"
 #include "ground.h"
 #include "chest.h"
 #include "Direction.h"
-//#include "ResourcePath.hpp"
 
-#include <windows.h>
 using namespace std;
 
 int tile1 = 14; //if tile1 = 0, then 1 tile will be created. If tile1 = 1, then 2 tiles will be created. Every 5 tiles a new row is created.
@@ -34,6 +35,10 @@ ground layer1[15]; //must be plus 1 of tile1
 chest gold;
 sf::Texture HUD;
 sf::Sprite HUDsprite;
+sf::RectangleShape rectangle;
+sf::RectangleShape rectangle2;
+sf::RectangleShape rectangle3;
+sf::RectangleShape rectangle4;
 
 std::string getexepath()
 {
@@ -44,7 +49,7 @@ std::string getexepath()
 
 int main()
 {
-string imagePath = getexepath();
+    string imagePath = getexepath();
     imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
     imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
     imagePath = imagePath.substr(0,imagePath.find_last_of("\\"));
@@ -95,6 +100,28 @@ string imagePath = getexepath();
 
     music.play();
     music.setVolume(20);
+
+    rectangle.setSize(sf::Vector2f(96, 10));
+    rectangle.setFillColor(sf::Color::Transparent);
+    rectangle.setOrigin(96/2,10/2);
+    rectangle.setPosition(300,231);
+
+    rectangle2.setSize(sf::Vector2f(96, 10));
+    rectangle2.setFillColor(sf::Color::Transparent);
+    rectangle2.setOrigin(96/2,10/2);
+    rectangle2.setPosition(300,145);
+
+    rectangle3.setSize(sf::Vector2f(96, 10));
+    rectangle3.setFillColor(sf::Color::Transparent);
+    rectangle3.setOrigin(96/2,10/2);
+    rectangle3.setPosition(252,188);
+    rectangle3.setRotation(90);
+
+    rectangle4.setSize(sf::Vector2f(96, 10));
+    rectangle4.setFillColor(sf::Color::Transparent);
+    rectangle4.setOrigin(96/2,10/2);
+    rectangle4.setPosition(348,188);
+    rectangle4.setRotation(90);
 
 	while (window.isOpen())
 	{
@@ -156,58 +183,64 @@ string imagePath = getexepath();
             if(moveTimer == 0) isMoving = false;
         }
 
-        /*
-    	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    	{
-        	steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
-        	steven.setFacing(Direction::WEST);
-    	}
-    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    	{
-        	steven.sprite.move(sf::Vector2f(0, -1*steven.base_speed * time.asMilliseconds()));
-        	steven.setFacing(Direction::NORTH);
-    	}
-    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    	{
-        	steven.sprite.move(sf::Vector2f(0, steven.base_speed * time.asMilliseconds()));
-        	steven.setFacing(Direction::SOUTH);
-    	}
-    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    	{
-        	steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
-        	steven.setFacing(Direction::EAST);
-    	}
-
-    	*/
-
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
     	steven.y = steven.sprite.getPosition().y;
+    	gold.x = gold.sprite.getPosition().x;
+    	gold.y = gold.sprite.getPosition().y;
 
     	doBoundariesStuff();
     	doAnimationStuff(time.asMilliseconds());
 
     	clock.restart().asMilliseconds();
 
-    	if(steven.sprite.getGlobalBounds().intersects(gold.sprite.getGlobalBounds()))
+    	if(steven.sprite.getGlobalBounds().intersects(rectangle.getGlobalBounds())) //pushes down
         {
-            if(steven.facingDirection == Direction::EAST)
-            {
-                steven.sprite.move(sf::Vector2f((-x/3) * time.asMilliseconds(), 0));
-            }
-            if(steven.facingDirection == Direction::WEST)
-            {
-                steven.sprite.move(sf::Vector2f((-x/3) * time.asMilliseconds(), 0));
-            }
-            if(steven.facingDirection == Direction::NORTH)
-            {
-                steven.sprite.move(sf::Vector2f(0, (-y/3) * time.asMilliseconds()));
-            }
-            if(steven.facingDirection == Direction::SOUTH)
-            {
-                steven.sprite.move(sf::Vector2f(0, (-y/3) * time.asMilliseconds()));
-            }
-            std::cout << "The sprite has collided" << std:: endl;
+                if(x == 0)
+                {
+                    steven.sprite.move(sf::Vector2f(0, (abs(y/3)) * time.asMilliseconds()));
+                }
+                else if(y == 0)
+                {
+                     steven.sprite.move(sf::Vector2f(0, (abs(x/3)) * time.asMilliseconds()));
+                }
+        }
+
+        if(steven.sprite.getGlobalBounds().intersects(rectangle2.getGlobalBounds())) //pushes up
+        {
+            if(x == 0)
+                {
+                    steven.sprite.move(sf::Vector2f(0, (abs(y/3))*-1 * time.asMilliseconds()));
+                }
+            else if(y == 0)
+                {
+                    steven.sprite.move(sf::Vector2f(0, (abs(x/3))*-1 * time.asMilliseconds()));
+                }
+
+        }
+
+        if(steven.sprite.getGlobalBounds().intersects(rectangle3.getGlobalBounds())) //pushes left
+        {
+            if(x == 0)
+                {
+                    steven.sprite.move(sf::Vector2f((abs(y/3))*-1 * time.asMilliseconds(), 0));
+                }
+            else if(y == 0)
+                {
+                    steven.sprite.move(sf::Vector2f((abs(x/3))*-1 * time.asMilliseconds(), 0));
+                }
+        }
+
+        if(steven.sprite.getGlobalBounds().intersects(rectangle4.getGlobalBounds())) //pushes right
+        {
+            if(x == 0)
+                {
+                    steven.sprite.move(sf::Vector2f(abs(-y/3) * time.asMilliseconds(), 0));
+                }
+            else if(y == 0)
+                {
+                    steven.sprite.move(sf::Vector2f(abs(-x/3) * time.asMilliseconds(), 0));
+                }
         }
 
     	window.clear();
@@ -248,7 +281,10 @@ string imagePath = getexepath();
         {
 
         }
-
+        window.draw(rectangle);
+        window.draw(rectangle2);
+        window.draw(rectangle3);
+        window.draw(rectangle4);
     	window.display();
 
 	}
