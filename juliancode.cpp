@@ -19,6 +19,13 @@ void drawHUD();
 bool firstTime = true;
 bool firstTime2 = true;
 
+int gridSize = 8;
+float moveSpeed = 1;
+bool isMoving = false;
+int moveTimer = 0;
+int speedX = 0;
+int speedY = 0;
+
 //CREATING OBJECTS
 player steven;
 ground layer1[15]; //must be plus 1 of tile1
@@ -85,6 +92,7 @@ string imagePath = getexepath();
     }
 
     music.play();
+    music.setVolume(20);
 
 	while (window.isOpen())
 	{
@@ -101,6 +109,52 @@ string imagePath = getexepath();
     	steven.lx = steven.x;
     	steven.ly = steven.y;
 
+    	if (isMoving == false)
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                isMoving = true;
+                moveTimer = gridSize;
+                speedX = moveSpeed;
+                speedY = 0;
+                steven.setFacing(Direction::EAST);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                isMoving = true;
+                moveTimer = gridSize;
+                speedX = -moveSpeed;
+                speedY = 0;
+                steven.setFacing(Direction::WEST);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                isMoving = true;
+                moveTimer = gridSize;
+                speedX = 0;
+                speedY = -moveSpeed;
+                steven.setFacing(Direction::NORTH);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                isMoving = true;
+                moveTimer = gridSize;
+                speedX = 0;
+                speedY = moveSpeed;
+                steven.setFacing(Direction::SOUTH);
+            }
+        }
+
+        if(isMoving == true)
+        {
+            float x = speedX;
+            float y = speedY;
+            steven.sprite.move(sf::Vector2f(x/3 * time.asMilliseconds(), y/3 * time.asMilliseconds()));
+            moveTimer -= moveSpeed;
+            if(moveTimer == 0) isMoving = false;
+        }
+
+        /*
     	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     	{
         	steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
@@ -121,6 +175,8 @@ string imagePath = getexepath();
         	steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
         	steven.setFacing(Direction::EAST);
     	}
+
+    	*/
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
