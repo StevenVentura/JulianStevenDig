@@ -1,4 +1,5 @@
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include <iostream>
 #include <string>
 #include "player.h"
@@ -75,6 +76,15 @@ string imagePath = getexepath();
 
 	sf::Clock clock;
 	bool firsttime = true;
+
+	sf::Music music;
+
+	if(!music.openFromFile(imagePath + "edgy.ogg"))
+    {
+        std::cout << "reeeee" << std::endl;
+    }
+
+    music.play();
 
 	while (window.isOpen())
 	{
