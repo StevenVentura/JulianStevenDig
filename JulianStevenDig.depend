@@ -397,13 +397,14 @@
 	<string>
 	<vector>
 
-1501618633 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
+1501638686 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<string>
 	"player.h"
 	"ground.h"
 	"chest.h"
+	"Direction.h"
 	<windows.h>
 
 1501626500 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
@@ -415,15 +416,16 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501376249 c:\users\8stev\desktop\newcode\julianstevendig\player.h
+1501638337 c:\users\8stev\desktop\newcode\julianstevendig\player.h
 	"SFML/Graphics.hpp"
 	<string>
 
-1501616554 source:c:\users\8stev\desktop\newcode\julianstevendig\player.cpp
+1501638337 source:c:\users\8stev\desktop\newcode\julianstevendig\player.cpp
 	"player.h"
+	"Direction.h"
 	<iostream>
 
-1501617169 source:c:\users\8stev\desktop\newcode\julianstevendig\ground.cpp
+1501638765 source:c:\users\8stev\desktop\newcode\julianstevendig\ground.cpp
 	"ground.h"
 	<iostream>
 
@@ -431,7 +433,7 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501618477 source:c:\users\8stev\desktop\newcode\julianstevendig\chest.cpp
+1501638826 source:c:\users\8stev\desktop\newcode\julianstevendig\chest.cpp
 	"chest.h"
 	<iostream>
 
@@ -456,4 +458,6 @@
 	<iostream>
 
 1501625621 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\direction.h
+
+1501638335 c:\users\8stev\desktop\newcode\julianstevendig\direction.h
 

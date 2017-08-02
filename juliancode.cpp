@@ -15,6 +15,7 @@ int tile1 = 14; //if tile1 = 0, then 1 tile will be created. If tile1 = 1, then 
 void doBoundariesStuff();
 void doAnimationStuff(int);
 void drawHUD();
+bool firstTime = true;
 
 //CREATING OBJECTS
 player steven;
@@ -95,20 +96,17 @@ string imagePath = getexepath();
         	steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
         	steven.setFacing(Direction::WEST);
     	}
-
-    	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     	{
         	steven.sprite.move(sf::Vector2f(0, -1*steven.base_speed * time.asMilliseconds()));
         	steven.setFacing(Direction::NORTH);
     	}
-
-    	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     	{
         	steven.sprite.move(sf::Vector2f(0, steven.base_speed * time.asMilliseconds()));
         	steven.setFacing(Direction::SOUTH);
     	}
-
-    	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     	{
         	steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
         	steven.setFacing(Direction::EAST);
@@ -123,6 +121,27 @@ string imagePath = getexepath();
 
     	clock.restart().asMilliseconds();
 
+    	if(steven.sprite.getGlobalBounds().intersects(gold.sprite.getGlobalBounds()))
+        {
+            if(steven.facingDirection == Direction::EAST)
+            {
+                steven.sprite.move(sf::Vector2f(-1*steven.base_speed * time.asMilliseconds(), 0));
+            }
+            if(steven.facingDirection == Direction::WEST)
+            {
+                steven.sprite.move(sf::Vector2f(steven.base_speed * time.asMilliseconds(), 0));
+            }
+            if(steven.facingDirection == Direction::NORTH)
+            {
+                steven.sprite.move(sf::Vector2f(0, steven.base_speed * time.asMilliseconds()));
+            }
+            if(steven.facingDirection == Direction::SOUTH)
+            {
+                steven.sprite.move(sf::Vector2f(0, -1*steven.base_speed * time.asMilliseconds()));
+            }
+            std::cout << "The sprite has collided" << std:: endl;
+        }
+
     	window.clear();
 
         for(int x = 0; x <= tile1; x++)
@@ -130,20 +149,25 @@ string imagePath = getexepath();
             window.draw(layer1[x].sprite);
         }
 
-        for (int r = 0; r < 3; r++)
+        if(firstTime == true)
         {
-            for (int c = 0; c < 5; c++)
+            firstTime == false;
+            for (int r = 0; r < 3; r++)
             {
-                layer1[r*5+c].sprite.setPosition(c*128+64,r*128+300);
+                for (int c = 0; c < 5; c++)
+                {
+                    layer1[r*5+c].sprite.setPosition(c*128+64,r*128+300);
+                }
+
             }
-
         }
-
 
 
     	window.draw(steven.sprite);
 
     	window.draw(gold.sprite);
+
+    	gold.sprite.setPosition(300,188);
 
     	window.draw(HUDsprite);
 
@@ -156,8 +180,6 @@ string imagePath = getexepath();
 void doBoundariesStuff() {
 float width = steven.texture.getSize().x; //170?
 float height = steven.texture.getSize().y; //289 pixels tall? Did you scale the sprite up by 4? 56 pixels works
-
-std::cout << width << endl;
 
 //player
 if (steven.x < steven.width*4) steven.setPosition(steven.width*4,steven.y);

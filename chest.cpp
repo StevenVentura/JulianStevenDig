@@ -11,6 +11,7 @@ chest::chest()
     height = 12;
     sprite.setOrigin(width/2,height/2);
 
+    sprite.setTextureRect(sf::IntRect(0,0,width,height));
 }
 
 chest::~chest()
