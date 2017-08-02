@@ -16,6 +16,7 @@ void doBoundariesStuff();
 void doAnimationStuff(int);
 void drawHUD();
 bool firstTime = true;
+bool firstTime2 = true;
 
 //CREATING OBJECTS
 player steven;
@@ -23,7 +24,6 @@ ground layer1[15]; //must be plus 1 of tile1
 chest gold;
 sf::Texture HUD;
 sf::Sprite HUDsprite;
-
 
 std::string getexepath()
 {
@@ -162,7 +162,6 @@ string imagePath = getexepath();
             }
         }
 
-
     	window.draw(steven.sprite);
 
     	window.draw(gold.sprite);
@@ -171,6 +170,16 @@ string imagePath = getexepath();
 
     	window.draw(HUDsprite);
 
+    	if(firstTime2 == true)
+        {
+            firstTime2 = false;
+            steven.sprite.setPosition(100,180);
+        }
+
+        if(steven.sprite.getGlobalBounds().intersects(layer1[0].sprite.getGlobalBounds()))
+        {
+
+        }
 
     	window.display();
 
@@ -197,5 +206,3 @@ void drawHUD()
 {
 
 }
-
-
