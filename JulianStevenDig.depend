@@ -400,16 +400,18 @@
 	<string>
 	<vector>
 
-1501669614 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
+1501824597 source:c:\users\8stev\desktop\newcode\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	"SFML/Audio.hpp"
+	<cmath>
+	<windows.h>
 	<iostream>
 	<string>
 	"player.h"
 	"ground.h"
 	"chest.h"
 	"Direction.h"
-	<windows.h>
+	"FileHelper.h"
 
 1501708700 source:c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\player.cpp
 	"player.h"
@@ -420,7 +422,7 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501638337 c:\users\8stev\desktop\newcode\julianstevendig\player.h
+1501823844 c:\users\8stev\desktop\newcode\julianstevendig\player.h
 	"SFML/Graphics.hpp"
 	<string>
 
@@ -437,13 +439,17 @@
 	"SFML/Graphics.hpp"
 	<string>
 
-1501638826 source:c:\users\8stev\desktop\newcode\julianstevendig\chest.cpp
+1501824515 source:c:\users\8stev\desktop\newcode\julianstevendig\chest.cpp
 	"chest.h"
+	"FileHelper.h"
 	<iostream>
+	<windows.h>
+	<cmath>
 
-1501618350 c:\users\8stev\desktop\newcode\julianstevendig\chest.h
+1501824336 c:\users\8stev\desktop\newcode\julianstevendig\chest.h
 	"SFML/Graphics.hpp"
 	<string>
+	"player.h"
 
 1501615329 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\ground.h
 	"SFML/Graphics.hpp"
@@ -464,4 +470,9 @@
 1501625621 c:\users\yoloswag\documents\reee\julianstevendig\julianstevendig\direction.h
 
 1501638335 c:\users\8stev\desktop\newcode\julianstevendig\direction.h
+
+1501822593 c:\users\8stev\desktop\newcode\julianstevendig\filehelper.h
+	<windows.h>
+	<iostream>
+	<string>
 

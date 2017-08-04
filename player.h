@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "SFML/Graphics.hpp"
 #include <string>
 using namespace std;
@@ -21,7 +24,9 @@ int spriteCycleCounter;
 int currentSprite;
 int facingDirection;
 bool facingLeft;
+float speedX, speedY;
 
 const static float base_speed = 0.25;
 
 };
+#endif
