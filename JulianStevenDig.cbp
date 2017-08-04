@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="FileHelper.h" />
 		<Unit filename="chest.cpp" />
 		<Unit filename="chest.h" />
 		<Unit filename="ground.cpp" />

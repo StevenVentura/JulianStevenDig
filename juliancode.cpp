@@ -13,7 +13,9 @@
 
 using namespace std;
 
-const int tile1 = (8)-1; //# of tiles -1
+const int tile1 = (100)-1; //# of tiles
+int levelWidth = 20; // # of columns
+int levelHeight = 5; //# of rows
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
@@ -188,14 +190,13 @@ int main()
         {
             int countplease = 0;
             firstTime == false;
-            for (int r = 0; r < 3; r++)
+
+            for (int r = 0; r < levelHeight; r++)
             {
                 bool pleasebreak = false;
-                for (int c = 0; c < 5; c++)
+                for (int c = 0; c < levelWidth; c++)
                 {
-
-
-                    layer1[r*5+c].sprite.setPosition(c*128+64,r*128+300);
+                    layer1[r*levelWidth+c].sprite.setPosition(c*128+64,r*128+300);
                     countplease++;
 
                     if (countplease == tile1+1) {pleasebreak = true; break;}
@@ -234,9 +235,11 @@ float height = steven.texture.getSize().y; //289 pixels tall? Did you scale the 
 /*
 if (steven.x < steven.width*4) steven.setPosition(steven.width*4,steven.y);
 if (steven.x > 600 - steven.width*4) steven.setPosition(600 - steven.width*4,steven.y);
-if (steven.y < steven.height*4) steven.setPosition(steven.x,steven.height*4);
 if (steven.y > 600 - steven.height*4) steven.setPosition(steven.x,600 - steven.height*4);
 */
+
+if (steven.y < 180) steven.setPosition(steven.x,180);
+
 }
 
 void doAnimationStuff(int elapsed) {
