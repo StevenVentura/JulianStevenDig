@@ -44,7 +44,7 @@ sf::Sprite HUDsprite;
 
 
 
-sf::RenderWindow window(sf::VideoMode(600, 600), "Surface");
+sf::RenderWindow window(sf::VideoMode(160*6, 144*6), "Surface"); //144
 
 
 int main()

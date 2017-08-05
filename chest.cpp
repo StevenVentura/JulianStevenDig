@@ -109,23 +109,23 @@ void chest::hitboxes()
     loadTexture(FileHelper::imagePath() + "chest.png");
 
     rectangle.setSize(sf::Vector2f(96, 10));
-    rectangle.setFillColor(sf::Color::Blue);
+    rectangle.setFillColor(sf::Color::Transparent);
     rectangle.setOrigin(96/2,10/2);
     rectangle.setPosition(sprite.getPosition().x,sprite.getPosition().y+43);
 
     rectangle2.setSize(sf::Vector2f(96, 10));
-    rectangle2.setFillColor(sf::Color::Blue);
+    rectangle2.setFillColor(sf::Color::Transparent);
     rectangle2.setOrigin(96/2,10/2);
     rectangle2.setPosition(sprite.getPosition().x,sprite.getPosition().y-43);
 
     rectangle3.setSize(sf::Vector2f(96, 10));
-    rectangle3.setFillColor(sf::Color::Blue);
+    rectangle3.setFillColor(sf::Color::Transparent);
     rectangle3.setOrigin(96/2,10/2);
     rectangle3.setPosition(sprite.getPosition().x-48,sprite.getPosition().y);
     rectangle3.setRotation(90);
 
     rectangle4.setSize(sf::Vector2f(96, 10));
-    rectangle4.setFillColor(sf::Color::Blue);
+    rectangle4.setFillColor(sf::Color::Transparent);
     rectangle4.setOrigin(96/2,10/2);
     rectangle4.setPosition(sprite.getPosition().x+48,sprite.getPosition().y);
     rectangle4.setRotation(90);
