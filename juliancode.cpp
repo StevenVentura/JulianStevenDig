@@ -30,8 +30,8 @@ bool isMoving = false;
 int moveTimer = 0;
 int speedX = 0;
 int speedY = 0;
-float x = 0;
-float y = 0;
+float xAxis = 0;
+float yAxis = 0;
 
 //CREATING OBJECTS
 player steven;
@@ -155,11 +155,11 @@ int main()
 
         if(isMoving == true)
         {
-            x = speedX;
-            y = speedY;
+            xAxis = speedX;
+            yAxis = speedY;
             steven.speedX = speedX;
             steven.speedY = speedY;
-            steven.sprite.move(sf::Vector2f(x/3 * time.asMilliseconds(), y/3 * time.asMilliseconds()));
+            steven.sprite.move(sf::Vector2f(xAxis/3 * time.asMilliseconds(), yAxis/3 * time.asMilliseconds()));
             moveTimer -= moveSpeed;
             if(moveTimer == 0) isMoving = false;
         }
