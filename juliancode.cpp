@@ -17,6 +17,7 @@ using namespace std;
 void doBoundariesStuff();
 void doAnimationStuff(int);
 void drawHUD();
+float boolpol(bool);
 
 bool firstTime = true;
 bool firstTime2 = true;
@@ -118,38 +119,43 @@ int main()
     	steven.lx = steven.x;
     	steven.ly = steven.y;
 
-    	speedX = 0; speedY = 0;
+    	steven.speedX = 0; steven.speedY = 0;
 
+    	//get da keyboard presses
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                speedX = moveSpeed;
-                speedY = 0;
+                steven.speedX = moveSpeed;
+                steven.speedY = 0;
                 steven.setFacing(Direction::EAST);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                speedX = -moveSpeed;
-                speedY = 0;
+                steven.speedX = -moveSpeed;
+                steven.speedY = 0;
                 steven.setFacing(Direction::WEST);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                speedX = 0;
-                speedY = -moveSpeed;
+                int midpoint = floor(steven.x/16.0) * 16.0 + 8;
+                steven.speedX = boolpol(steven.x < midpoint) * moveSpeed * 2;
+                steven.snapX();
+
+                steven.speedY = -moveSpeed;
                 steven.setFacing(Direction::NORTH);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                speedX = 0;
-                speedY = moveSpeed;
+                int midpoint = floor(steven.x/16.0) * 16.0 + 8;
+                steven.speedX = boolpol(steven.x < midpoint) * moveSpeed * 2;
+                    steven.snapX();
+
+                steven.speedY = moveSpeed;
                 steven.setFacing(Direction::SOUTH);
             }
 
             //now actually move him
-            steven.speedX = speedX;
-            steven.speedY = speedY;
-            steven.sprite.move(sf::Vector2f(speedX/3 * time.asMilliseconds() /10, speedY/3 * time.asMilliseconds() / 10));
 
+            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /10, steven.speedY/3 * time.asMilliseconds() / 10));
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
@@ -237,4 +243,11 @@ steven.updateTexture(elapsed);
 void drawHUD()
 {
 
+}
+float boolpol(bool yes)
+{
+    if (yes)
+        return 1;
+    else
+        return -1;
 }

@@ -14,6 +14,7 @@ void loadTexture(string imagePath);
 void updateTexture(int elapsed);
 void setPosition(float x, float y);
 void setFacing(int direction);
+void snapX();
 
 sf::Sprite sprite;
 sf::Texture texture;

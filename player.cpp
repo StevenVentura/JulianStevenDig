@@ -1,6 +1,7 @@
 #include "player.h"
 #include "Direction.h"
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 player::player() {
@@ -86,7 +87,16 @@ break;
 
 }
 
-void player::pls() {
-x = x + 1;
+void player::snapX()
+{
+//if he is close enough to the middle of the cell, then snap him to it.
+int midpoint = floor(x/16.0) * 16.0 + 8;
+    if (abs(x-midpoint) < 1.0)
+    {
+speedX = 0;
+x = midpoint;
+cout << "x is " << x << endl;
+sprite.setPosition(x,y);
+    }
 
 }
