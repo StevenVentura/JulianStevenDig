@@ -24,57 +24,29 @@ chest::~chest()
 }
 void chest::doIntersectionCheck(player& steven,sf::Time& time) {
 
-float please = 0.25f;
+float please = 1.0f;
 
-if(steven.sprite.getGlobalBounds().intersects(rectangle.getGlobalBounds())) //pushes down
+if(steven.sprite.getGlobalBounds().intersects(rectangle.getGlobalBounds()) && steven.y > rectangle.getGlobalBounds().top) //pushes down
         {
 
-                if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, please*(abs(steven.speedY/3)) * time.asMilliseconds()));
-                }
-                else if(steven.speedY == 0)
-                {
-                     steven.sprite.move(sf::Vector2f(0, please*(abs(steven.speedX/3)) * time.asMilliseconds()));
-                }
+                steven.sprite.setPosition(steven.x,rectangle.getGlobalBounds().top+rectangle.getGlobalBounds().height+steven.height/2);
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle2.getGlobalBounds())) //pushes up
+        if(steven.sprite.getGlobalBounds().intersects(rectangle2.getGlobalBounds()) && steven.y < rectangle2.getGlobalBounds().top) //pushes up
         {
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, please*(abs(steven.speedY/3))*-1 * time.asMilliseconds()));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, please*(abs(steven.speedX/3))*-1 * time.asMilliseconds()));
-                }
+            steven.sprite.setPosition(steven.x,rectangle2.getGlobalBounds().top-steven.height/2);
 
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle3.getGlobalBounds())) //pushes left
+        if(steven.sprite.getGlobalBounds().intersects(rectangle3.getGlobalBounds()) && steven.x < rectangle3.getGlobalBounds().left) //pushes left
         {
+            steven.sprite.setPosition(rectangle3.getGlobalBounds().left-steven.width/2,steven.y);
 
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(please*(abs(steven.speedY/3))*-1 * time.asMilliseconds(), 0));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(please*(abs(steven.speedX/3))*-1 * time.asMilliseconds(), 0));
-                }
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle4.getGlobalBounds())) //pushes right
+        if(steven.sprite.getGlobalBounds().intersects(rectangle4.getGlobalBounds())  && steven.x > rectangle3.getGlobalBounds().left) //pushes right
         {
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(please*abs(-steven.speedY/3) * time.asMilliseconds(), 0));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(please*abs(-steven.speedX/3) * time.asMilliseconds(), 0));
-                }
+            steven.sprite.setPosition(rectangle4.getGlobalBounds().left+rectangle4.getGlobalBounds().width+steven.width/2,steven.y);
         }
 
 

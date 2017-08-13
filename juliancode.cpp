@@ -73,7 +73,7 @@ int main()
 
 
     //POSITIONING SPRITES
-    gold.sprite.setPosition(0+8,0+8);
+    gold.sprite.setPosition(32+8,32+8);
     gold2.sprite.setPosition(0+8,16+8);
     steven.sprite.setPosition(32+8,32+8);
     for (int r = 0; r < mapRows; r++)
@@ -159,7 +159,8 @@ steven.pointedUpLast=false;
             }
 
             //now actually move him
-
+gold.doIntersectionCheck(steven,time);
+    	gold2.doIntersectionCheck(steven,time);
             steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /10, steven.speedY/3 * time.asMilliseconds() / 10));
 
     	//update his position variables
@@ -173,8 +174,6 @@ steven.pointedUpLast=false;
 
     	clock.restart().asMilliseconds();
 
-    	gold.doIntersectionCheck(steven,time);
-    	gold2.doIntersectionCheck(steven,time);
 
 
     	window.clear();
