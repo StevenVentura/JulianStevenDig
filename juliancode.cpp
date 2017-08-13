@@ -13,9 +13,6 @@
 
 using namespace std;
 
-const int tile1 = (100)-1; //# of tiles
-int levelWidth = 20; // # of columns
-int levelHeight = 5; //# of rows
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
@@ -24,18 +21,18 @@ void drawHUD();
 bool firstTime = true;
 bool firstTime2 = true;
 
-int gridSize = 8;
+
 float moveSpeed = 1;
-bool isMoving = false;
-int moveTimer = 0;
-int speedX = 0;
-int speedY = 0;
-float xAxis = 0;
-float yAxis = 0;
+
+
+float speedX = 0;
+float speedY = 0;
+
 
 //CREATING OBJECTS
 player steven;
-ground layer1[tile1+1]; //must be plus 1 of tile1
+const int mapRows = 16, mapCols = 16;
+ground layer1[mapRows][mapCols]; //must be plus 1 of tile1
 
 chest gold;
 chest gold2;
@@ -67,26 +64,22 @@ int main()
     HUDsprite.setTexture(HUD);
     //HUDsprite.scale(six/HUD.getSize().x,six/HUD.getSize().x);
 
-    for(int x = 0; x <= tile1; x++)
-    {
-        layer1[x].loadTexture(imagePath + "ground.png");
-    }
+    for (int r = 0; r < mapRows; r++)
+        for (int c = 0; c < mapCols; c++)
+            layer1[r][c].loadTexture(imagePath + "ground.png");
 
 
     //UPDATING SPRITES
     steven.updateTexture(10000);
 
-    //SCALING SPRITES
-    //steven.sprite.setScale(6,6);
-    for(int x = 0; x <=tile1; x++)
-    {
-     //   layer1[x].sprite.setScale(6,6);
-    }
-
 
     //POSITIONING SPRITES
     gold.sprite.setPosition(0+8,0+8);
-    gold2.sprite.setPosition(32+8,32+8);
+    gold2.sprite.setPosition(0+8,16+8);
+    steven.sprite.setPosition(32+8,32+8);
+    for (int r = 0; r < mapRows; r++)
+            for (int c = 0; c < mapCols; c++)
+                layer1[r][c].sprite.setPosition(c*16+8,r*16+8+32);
 
 	window.setFramerateLimit(60);
 
@@ -106,6 +99,10 @@ int main()
     gold.hitboxes();
     gold2.hitboxes();
 
+
+
+
+
 	while (window.isOpen())
 	{
     	sf::Event event;
@@ -121,52 +118,38 @@ int main()
     	steven.lx = steven.x;
     	steven.ly = steven.y;
 
-    	if (isMoving == false)
-        {
+    	speedX = 0; speedY = 0;
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                isMoving = true;
-                moveTimer = gridSize;
                 speedX = moveSpeed;
                 speedY = 0;
                 steven.setFacing(Direction::EAST);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                isMoving = true;
-                moveTimer = gridSize;
                 speedX = -moveSpeed;
                 speedY = 0;
                 steven.setFacing(Direction::WEST);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                isMoving = true;
-                moveTimer = gridSize;
                 speedX = 0;
                 speedY = -moveSpeed;
                 steven.setFacing(Direction::NORTH);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                isMoving = true;
-                moveTimer = gridSize;
                 speedX = 0;
                 speedY = moveSpeed;
                 steven.setFacing(Direction::SOUTH);
             }
-        }
 
-        if(isMoving == true)
-        {
-            xAxis = speedX;
-            yAxis = speedY;
+            //now actually move him
             steven.speedX = speedX;
             steven.speedY = speedY;
-            steven.sprite.move(sf::Vector2f(xAxis/3 * time.asMilliseconds() /10, yAxis/3 * time.asMilliseconds() / 10));
-            moveTimer -= moveSpeed;
-            if(moveTimer == 0) isMoving = false;
-        }
+            steven.sprite.move(sf::Vector2f(speedX/3 * time.asMilliseconds() /10, speedY/3 * time.asMilliseconds() / 10));
+
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
@@ -185,30 +168,11 @@ int main()
 
     	window.clear();
 
-        for(int x = 0; x <= tile1; x++)
-        {
-            window.draw(layer1[x].sprite);
-        }
+        for (int r = 0; r < mapRows; r++)
+            for (int c = 0; c < mapCols; c++)
+                window.draw(layer1[r][c].sprite);
 
-        if(firstTime == true)
-        {
-            int countplease = 0;
-            firstTime == false;
 
-            for (int r = 0; r < levelHeight; r++)
-            {
-                bool pleasebreak = false;
-                for (int c = 0; c < levelWidth; c++)
-                {
-                    layer1[r*levelWidth+c].sprite.setPosition(c*16+8,r*16+32+8);
-                    countplease++;
-
-                    if (countplease == tile1+1) {pleasebreak = true; break;}
-                }
-                if (pleasebreak) break;
-
-            }
-        }
 
     	window.draw(steven.sprite);
         gold.draw(window);
@@ -217,11 +181,6 @@ int main()
 
     	window.draw(HUDsprite);
 
-    	if(firstTime2 == true)
-        {
-            firstTime2 = false;
-            steven.sprite.setPosition(32,32);
-        }
 
 
         //draw the grid
