@@ -46,6 +46,9 @@ sf::Sprite HUDsprite;
 
 sf::RenderWindow window(sf::VideoMode(160*6, 144*6), "Surface"); //144
 
+const float three = 144/2*6;
+const float six = 160*6;
+
 
 int main()
 {
@@ -62,7 +65,7 @@ int main()
     }
 
     HUDsprite.setTexture(HUD);
-    HUDsprite.scale(600.0/HUD.getSize().x,600.0/HUD.getSize().x);
+    //HUDsprite.scale(six/HUD.getSize().x,six/HUD.getSize().x);
 
     for(int x = 0; x <= tile1; x++)
     {
@@ -74,22 +77,23 @@ int main()
     steven.updateTexture(10000);
 
     //SCALING SPRITES
-    steven.sprite.setScale(8,8);
+    //steven.sprite.setScale(6,6);
     for(int x = 0; x <=tile1; x++)
     {
-        layer1[x].sprite.setScale(8,8);
+     //   layer1[x].sprite.setScale(6,6);
     }
 
+
     //POSITIONING SPRITES
-    gold.sprite.setPosition(100,188);
-    gold2.sprite.setPosition(100+(gold.distance*3),188);
+    gold.sprite.setPosition(0+8,0+8);
+    gold2.sprite.setPosition(32+8,32+8);
 
 	window.setFramerateLimit(60);
 
 	sf::Clock clock;
 	bool firsttime = true;
 
-	sf::Music music;
+	/*sf::Music music;
 
 	if(!music.openFromFile(imagePath + "edgy.ogg"))
     {
@@ -98,7 +102,7 @@ int main()
 
     music.play();
     music.setVolume(20);
-
+*/
     gold.hitboxes();
     gold2.hitboxes();
 
@@ -159,7 +163,7 @@ int main()
             yAxis = speedY;
             steven.speedX = speedX;
             steven.speedY = speedY;
-            steven.sprite.move(sf::Vector2f(xAxis/3 * time.asMilliseconds(), yAxis/3 * time.asMilliseconds()));
+            steven.sprite.move(sf::Vector2f(xAxis/3 * time.asMilliseconds() /10, yAxis/3 * time.asMilliseconds() / 10));
             moveTimer -= moveSpeed;
             if(moveTimer == 0) isMoving = false;
         }
@@ -196,7 +200,7 @@ int main()
                 bool pleasebreak = false;
                 for (int c = 0; c < levelWidth; c++)
                 {
-                    layer1[r*levelWidth+c].sprite.setPosition(c*128+64,r*128+300);
+                    layer1[r*levelWidth+c].sprite.setPosition(c*16+8,r*16+32+8);
                     countplease++;
 
                     if (countplease == tile1+1) {pleasebreak = true; break;}
@@ -216,11 +220,35 @@ int main()
     	if(firstTime2 == true)
         {
             firstTime2 = false;
-            steven.sprite.setPosition(250,180);
+            steven.sprite.setPosition(32,32);
         }
 
-        sf::FloatRect visibleArea(steven.x-300,steven.y-300,600,600);
-        HUDsprite.setPosition(steven.x-300,steven.y-300);
+
+        //draw the grid
+            for (int c = 0; c < 50; c++)
+        {
+            sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(c*16,0)),
+            sf::Vertex(sf::Vector2f(c*16,500))
+            };
+            //line.color = sf::Color(255,0,0);
+            window.draw(line,2,sf::Lines);
+        }
+
+//draw the grid
+        for (int r = 0; r < 50; r++)
+        {
+sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(0,r*16)),
+            sf::Vertex(sf::Vector2f(500*50,r*16))
+            };
+            //line.color = sf::Color(255,0,0);
+            window.draw(line,2,sf::Lines);
+
+        }
+
+        sf::FloatRect visibleArea(steven.x-160/2,steven.y-144/2,160,144);
+        HUDsprite.setPosition(steven.x-160/2,steven.y-144/2);
         window.setView(sf::View(visibleArea));
     	window.display();
 
@@ -238,7 +266,8 @@ if (steven.x > 600 - steven.width*4) steven.setPosition(600 - steven.width*4,ste
 if (steven.y > 600 - steven.height*4) steven.setPosition(steven.x,600 - steven.height*4);
 */
 
-if (steven.y < 180) steven.setPosition(steven.x,180);
+if (steven.y-steven.height/2 < 0) steven.setPosition(steven.x,steven.height/2);
+if (steven.x-steven.width/2 < 0) steven.setPosition(steven.width/2,steven.y);
 
 }
 
