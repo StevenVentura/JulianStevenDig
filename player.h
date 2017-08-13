@@ -15,6 +15,7 @@ void updateTexture(int elapsed);
 void setPosition(float x, float y);
 void setFacing(int direction);
 void snapX();
+void snapY();
 
 sf::Sprite sprite;
 sf::Texture texture;
@@ -25,6 +26,7 @@ int spriteCycleCounter;
 int currentSprite;
 int facingDirection;
 bool facingLeft;
+bool pointedUpLast;
 float speedX, speedY;
 
 const static float base_speed = 0.25;

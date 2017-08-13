@@ -19,8 +19,6 @@ void doAnimationStuff(int);
 void drawHUD();
 float boolpol(bool);
 
-bool firstTime = true;
-bool firstTime2 = true;
 
 
 float moveSpeed = 1;
@@ -124,20 +122,27 @@ int main()
     	//get da keyboard presses
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
+
+                steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
+                steven.snapY();
+
                 steven.speedX = moveSpeed;
-                steven.speedY = 0;
+
                 steven.setFacing(Direction::EAST);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
+
+                 steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
+                steven.snapY();
                 steven.speedX = -moveSpeed;
-                steven.speedY = 0;
+
                 steven.setFacing(Direction::WEST);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                int midpoint = floor(steven.x/16.0) * 16.0 + 8;
-                steven.speedX = boolpol(steven.x < midpoint) * moveSpeed * 2;
+    steven.pointedUpLast=true;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
                 steven.snapX();
 
                 steven.speedY = -moveSpeed;
@@ -145,9 +150,9 @@ int main()
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                int midpoint = floor(steven.x/16.0) * 16.0 + 8;
-                steven.speedX = boolpol(steven.x < midpoint) * moveSpeed * 2;
-                    steven.snapX();
+steven.pointedUpLast=false;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
+                steven.snapX();
 
                 steven.speedY = moveSpeed;
                 steven.setFacing(Direction::SOUTH);
