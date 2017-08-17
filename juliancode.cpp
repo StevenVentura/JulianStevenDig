@@ -13,29 +13,25 @@
 
 using namespace std;
 
-const int tile1 = (100)-1; //# of tiles
-int levelWidth = 20; // # of columns
-int levelHeight = 5; //# of rows
 
 void doBoundariesStuff();
 void doAnimationStuff(int);
 void drawHUD();
+float boolpol(bool);
 
-bool firstTime = true;
-bool firstTime2 = true;
 
-int gridSize = 8;
+
 float moveSpeed = 1;
-bool isMoving = false;
-int moveTimer = 0;
-int speedX = 0;
-int speedY = 0;
-float xAxis = 0;
-float yAxis = 0;
+
+
+float speedX = 0;
+float speedY = 0;
+
 
 //CREATING OBJECTS
 player steven;
-ground layer1[tile1+1]; //must be plus 1 of tile1
+const int mapRows = 16, mapCols = 16;
+ground layer1[mapRows][mapCols]; //must be plus 1 of tile1
 
 chest gold;
 chest gold2;
@@ -45,6 +41,9 @@ sf::Sprite HUDsprite;
 
 
 sf::RenderWindow window(sf::VideoMode(160*6, 144*6), "Surface"); //144
+
+const float three = 144/2*6;
+const float six = 160*6;
 
 
 int main()
@@ -62,34 +61,31 @@ int main()
     }
 
     HUDsprite.setTexture(HUD);
-    HUDsprite.scale(600.0/HUD.getSize().x,600.0/HUD.getSize().x);
+    //HUDsprite.scale(six/HUD.getSize().x,six/HUD.getSize().x);
 
-    for(int x = 0; x <= tile1; x++)
-    {
-        layer1[x].loadTexture(imagePath + "ground.png");
-    }
+    for (int r = 0; r < mapRows; r++)
+        for (int c = 0; c < mapCols; c++)
+            layer1[r][c].loadTexture(imagePath + "ground.png");
 
 
     //UPDATING SPRITES
     steven.updateTexture(10000);
 
-    //SCALING SPRITES
-    steven.sprite.setScale(8,8);
-    for(int x = 0; x <=tile1; x++)
-    {
-        layer1[x].sprite.setScale(8,8);
-    }
 
     //POSITIONING SPRITES
-    gold.sprite.setPosition(100,188);
-    gold2.sprite.setPosition(100+(gold.distance*3),188);
+    gold.sprite.setPosition(32+8,32+8);
+    gold2.sprite.setPosition(0+8,16+8);
+    steven.sprite.setPosition(32+8,32+8);
+    for (int r = 0; r < mapRows; r++)
+            for (int c = 0; c < mapCols; c++)
+                layer1[r][c].sprite.setPosition(c*16+8,r*16+8+32);
 
 	window.setFramerateLimit(60);
 
 	sf::Clock clock;
 	bool firsttime = true;
 
-	sf::Music music;
+	/*sf::Music music;
 
 	if(!music.openFromFile(imagePath + "edgy.ogg"))
     {
@@ -98,9 +94,13 @@ int main()
 
     music.play();
     music.setVolume(20);
-
+*/
     gold.hitboxes();
     gold2.hitboxes();
+
+
+
+
 
 	while (window.isOpen())
 	{
@@ -117,52 +117,51 @@ int main()
     	steven.lx = steven.x;
     	steven.ly = steven.y;
 
-    	if (isMoving == false)
-        {
+    	steven.speedX = 0; steven.speedY = 0;
+
+    	//get da keyboard presses
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                isMoving = true;
-                moveTimer = gridSize;
-                speedX = moveSpeed;
-                speedY = 0;
+
+                steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
+                steven.snapY();
+
+                steven.speedX = moveSpeed;
+
                 steven.setFacing(Direction::EAST);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                isMoving = true;
-                moveTimer = gridSize;
-                speedX = -moveSpeed;
-                speedY = 0;
+
+                 steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
+                steven.snapY();
+                steven.speedX = -moveSpeed;
+
                 steven.setFacing(Direction::WEST);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                isMoving = true;
-                moveTimer = gridSize;
-                speedX = 0;
-                speedY = -moveSpeed;
+    steven.pointedUpLast=true;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
+                steven.snapX();
+
+                steven.speedY = -moveSpeed;
                 steven.setFacing(Direction::NORTH);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                isMoving = true;
-                moveTimer = gridSize;
-                speedX = 0;
-                speedY = moveSpeed;
+steven.pointedUpLast=false;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
+                steven.snapX();
+
+                steven.speedY = moveSpeed;
                 steven.setFacing(Direction::SOUTH);
             }
-        }
 
-        if(isMoving == true)
-        {
-            xAxis = speedX;
-            yAxis = speedY;
-            steven.speedX = speedX;
-            steven.speedY = speedY;
-            steven.sprite.move(sf::Vector2f(xAxis/3 * time.asMilliseconds(), yAxis/3 * time.asMilliseconds()));
-            moveTimer -= moveSpeed;
-            if(moveTimer == 0) isMoving = false;
-        }
+            //now actually move him
+gold.doIntersectionCheck(steven,time);
+    	gold2.doIntersectionCheck(steven,time);
+            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /10, steven.speedY/3 * time.asMilliseconds() / 10));
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
@@ -175,36 +174,15 @@ int main()
 
     	clock.restart().asMilliseconds();
 
-    	gold.doIntersectionCheck(steven,time);
-    	gold2.doIntersectionCheck(steven,time);
 
 
     	window.clear();
 
-        for(int x = 0; x <= tile1; x++)
-        {
-            window.draw(layer1[x].sprite);
-        }
+        for (int r = 0; r < mapRows; r++)
+            for (int c = 0; c < mapCols; c++)
+                window.draw(layer1[r][c].sprite);
 
-        if(firstTime == true)
-        {
-            int countplease = 0;
-            firstTime == false;
 
-            for (int r = 0; r < levelHeight; r++)
-            {
-                bool pleasebreak = false;
-                for (int c = 0; c < levelWidth; c++)
-                {
-                    layer1[r*levelWidth+c].sprite.setPosition(c*128+64,r*128+300);
-                    countplease++;
-
-                    if (countplease == tile1+1) {pleasebreak = true; break;}
-                }
-                if (pleasebreak) break;
-
-            }
-        }
 
     	window.draw(steven.sprite);
         gold.draw(window);
@@ -213,14 +191,33 @@ int main()
 
     	window.draw(HUDsprite);
 
-    	if(firstTime2 == true)
+
+
+        //draw the grid
+            for (int c = 0; c < 50; c++)
         {
-            firstTime2 = false;
-            steven.sprite.setPosition(250,180);
+            sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(c*16,0)),
+            sf::Vertex(sf::Vector2f(c*16,500))
+            };
+            //line.color = sf::Color(255,0,0);
+            window.draw(line,2,sf::Lines);
         }
 
-        sf::FloatRect visibleArea(steven.x-300,steven.y-300,600,600);
-        HUDsprite.setPosition(steven.x-300,steven.y-300);
+//draw the grid
+        for (int r = 0; r < 50; r++)
+        {
+sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(0,r*16)),
+            sf::Vertex(sf::Vector2f(500*50,r*16))
+            };
+            //line.color = sf::Color(255,0,0);
+            window.draw(line,2,sf::Lines);
+
+        }
+
+        sf::FloatRect visibleArea(steven.x-160/2,steven.y-144/2,160,144);
+        HUDsprite.setPosition(steven.x-160/2,steven.y-144/2);
         window.setView(sf::View(visibleArea));
     	window.display();
 
@@ -238,7 +235,8 @@ if (steven.x > 600 - steven.width*4) steven.setPosition(600 - steven.width*4,ste
 if (steven.y > 600 - steven.height*4) steven.setPosition(steven.x,600 - steven.height*4);
 */
 
-if (steven.y < 180) steven.setPosition(steven.x,180);
+if (steven.y-steven.height/2 < 0) steven.setPosition(steven.x,steven.height/2);
+if (steven.x-steven.width/2 < 0) steven.setPosition(steven.width/2,steven.y);
 
 }
 
@@ -249,4 +247,11 @@ steven.updateTexture(elapsed);
 void drawHUD()
 {
 
+}
+float boolpol(bool yes)
+{
+    if (yes)
+        return 1;
+    else
+        return -1;
 }

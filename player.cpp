@@ -1,6 +1,7 @@
 #include "player.h"
 #include "Direction.h"
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 player::player() {
@@ -13,6 +14,7 @@ spriteCycleCounter = 0;
 spriteCycleSpeed = 200;//milliseconds
 facingDirection = Direction::EAST;
 facingLeft = false;
+pointedUpLast = false;
 
 sprite.setOrigin(width/2,height/2);
 
@@ -86,7 +88,28 @@ break;
 
 }
 
-void player::pls() {
-x = x + 1;
+void player::snapX()
+{
+//if he is close enough to the middle of the cell, then snap him to it.
+int midpoint = floor(x/16.0) * 16.0 + 8;
+    if (abs(x-midpoint) < 1.0)
+    {
+speedX = 0;
+x = midpoint;
+
+sprite.setPosition(x,y);
+    }
+
+}
+void player::snapY()
+{
+//if he is close enough to the middle of the cell, then snap him to it.
+int midpoint = floor(y/16.0) * 16.0 + 8;
+    if (abs(y-midpoint) < 1.0)
+    {
+speedY = 0;
+y = midpoint;
+sprite.setPosition(x,y);
+    }
 
 }

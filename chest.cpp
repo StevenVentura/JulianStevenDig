@@ -24,55 +24,29 @@ chest::~chest()
 }
 void chest::doIntersectionCheck(player& steven,sf::Time& time) {
 
-if(steven.sprite.getGlobalBounds().intersects(rectangle.getGlobalBounds())) //pushes down
+float please = 1.0f;
+
+if(steven.sprite.getGlobalBounds().intersects(rectangle.getGlobalBounds()) && steven.y > rectangle.getGlobalBounds().top) //pushes down
         {
 
-                if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, (abs(steven.speedY/3)) * time.asMilliseconds()));
-                }
-                else if(steven.speedY == 0)
-                {
-                     steven.sprite.move(sf::Vector2f(0, (abs(steven.speedX/3)) * time.asMilliseconds()));
-                }
+                steven.sprite.setPosition(steven.x,rectangle.getGlobalBounds().top+rectangle.getGlobalBounds().height+steven.height/2);
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle2.getGlobalBounds())) //pushes up
+        if(steven.sprite.getGlobalBounds().intersects(rectangle2.getGlobalBounds()) && steven.y < rectangle2.getGlobalBounds().top) //pushes up
         {
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, (abs(steven.speedY/3))*-1 * time.asMilliseconds()));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(0, (abs(steven.speedX/3))*-1 * time.asMilliseconds()));
-                }
+            steven.sprite.setPosition(steven.x,rectangle2.getGlobalBounds().top-steven.height/2);
 
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle3.getGlobalBounds())) //pushes left
+        if(steven.sprite.getGlobalBounds().intersects(rectangle3.getGlobalBounds()) && steven.x < rectangle3.getGlobalBounds().left) //pushes left
         {
+            steven.sprite.setPosition(rectangle3.getGlobalBounds().left-steven.width/2,steven.y);
 
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f((abs(steven.speedY/3))*-1 * time.asMilliseconds(), 0));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f((abs(steven.speedX/3))*-1 * time.asMilliseconds(), 0));
-                }
         }
 
-        if(steven.sprite.getGlobalBounds().intersects(rectangle4.getGlobalBounds())) //pushes right
+        if(steven.sprite.getGlobalBounds().intersects(rectangle4.getGlobalBounds())  && steven.x > rectangle3.getGlobalBounds().left) //pushes right
         {
-            if(steven.speedX == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(abs(-steven.speedY/3) * time.asMilliseconds(), 0));
-                }
-            else if(steven.speedY == 0)
-                {
-                    steven.sprite.move(sf::Vector2f(abs(-steven.speedX/3) * time.asMilliseconds(), 0));
-                }
+            steven.sprite.setPosition(rectangle4.getGlobalBounds().left+rectangle4.getGlobalBounds().width+steven.width/2,steven.y);
         }
 
 
@@ -105,28 +79,28 @@ void chest::loadTexture(string pngPath) {
 
 void chest::hitboxes()
 {
-    sprite.setScale(8,8);
+    //sprite.setScale(8,8);
     loadTexture(FileHelper::imagePath() + "chest.png");
 
-    rectangle.setSize(sf::Vector2f(96, 10));
+    rectangle.setSize(sf::Vector2f(16, 4));
     rectangle.setFillColor(sf::Color::Transparent);
-    rectangle.setOrigin(96/2,10/2);
-    rectangle.setPosition(sprite.getPosition().x,sprite.getPosition().y+43);
+    rectangle.setOrigin(16/2,4/2);
+    rectangle.setPosition(sprite.getPosition().x,sprite.getPosition().y+7);
 
-    rectangle2.setSize(sf::Vector2f(96, 10));
+    rectangle2.setSize(sf::Vector2f(16, 4));
     rectangle2.setFillColor(sf::Color::Transparent);
-    rectangle2.setOrigin(96/2,10/2);
-    rectangle2.setPosition(sprite.getPosition().x,sprite.getPosition().y-43);
+    rectangle2.setOrigin(16/2,4/2);
+    rectangle2.setPosition(sprite.getPosition().x,sprite.getPosition().y-7);
 
-    rectangle3.setSize(sf::Vector2f(96, 10));
+    rectangle3.setSize(sf::Vector2f(16, 4));
     rectangle3.setFillColor(sf::Color::Transparent);
-    rectangle3.setOrigin(96/2,10/2);
-    rectangle3.setPosition(sprite.getPosition().x-48,sprite.getPosition().y);
+    rectangle3.setOrigin(16/2,4/2);
+    rectangle3.setPosition(sprite.getPosition().x-8,sprite.getPosition().y);
     rectangle3.setRotation(90);
 
-    rectangle4.setSize(sf::Vector2f(96, 10));
+    rectangle4.setSize(sf::Vector2f(16, 4));
     rectangle4.setFillColor(sf::Color::Transparent);
-    rectangle4.setOrigin(96/2,10/2);
-    rectangle4.setPosition(sprite.getPosition().x+48,sprite.getPosition().y);
+    rectangle4.setOrigin(16/2,4/2);
+    rectangle4.setPosition(sprite.getPosition().x+8,sprite.getPosition().y);
     rectangle4.setRotation(90);
 }
