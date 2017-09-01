@@ -80,8 +80,6 @@ break;
 case 1:
 sprite.setTextureRect(sf::IntRect(26,8,width,height));
 break;
-
-
     }
 
 }
@@ -91,13 +89,17 @@ break;
 void player::snapX()
 {
 //if he is close enough to the middle of the cell, then snap him to it.
-int midpoint = floor(x/16.0) * 16.0 + 8;
+int midpoint = floor(x/16.0) * 16.0 + 8; //40
     if (abs(x-midpoint) < 1.0)
     {
 speedX = 0;
 x = midpoint;
-
 sprite.setPosition(x,y);
+    recenter2 = true;
+    }
+    else
+    {
+    recenter2 = false;
     }
 
 }
@@ -110,6 +112,10 @@ int midpoint = floor(y/16.0) * 16.0 + 8;
 speedY = 0;
 y = midpoint;
 sprite.setPosition(x,y);
+    recenter = true;
     }
-
+    else
+    {
+    recenter = false;
+    }
 }
