@@ -19,7 +19,7 @@ void doAnimationStuff(int);
 void drawHUD();
 float boolpol(bool);
 
-float moveSpeed = 1;
+float moveSpeed = 10;
 
 float speedX = 0;
 float speedY = 0;
@@ -168,7 +168,7 @@ int main()
             //now actually move him
         gold.doIntersectionCheck(steven,time);
     	gold2.doIntersectionCheck(steven,time);
-            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /10, steven.speedY/3 * time.asMilliseconds() / 10));
+            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /100, steven.speedY/3 * time.asMilliseconds() / 100));
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
