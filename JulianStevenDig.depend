@@ -481,7 +481,7 @@
 	<iostream>
 	<string>
 
-1502083669 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
+1504296434 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
 	"SFML/Graphics.hpp"
 	"SFML/Audio.hpp"
 	<cmath>
@@ -494,7 +494,7 @@
 	"Direction.h"
 	"FileHelper.h"
 
-1502071536 c:\users\jacqueline\desktop\newcode\julianstevendig\player.h
+1504294230 c:\users\jacqueline\desktop\newcode\julianstevendig\player.h
 	"SFML/Graphics.hpp"
 	<string>
 
@@ -514,12 +514,13 @@
 	<iostream>
 	<string>
 
-1502071536 source:c:\users\jacqueline\desktop\newcode\julianstevendig\player.cpp
+1504295659 source:c:\users\jacqueline\desktop\newcode\julianstevendig\player.cpp
 	"player.h"
 	"Direction.h"
 	<iostream>
+	<cmath>
 
-1502071536 source:c:\users\jacqueline\desktop\newcode\julianstevendig\chest.cpp
+1502954776 source:c:\users\jacqueline\desktop\newcode\julianstevendig\chest.cpp
 	"chest.h"
 	"FileHelper.h"
 	<iostream>
