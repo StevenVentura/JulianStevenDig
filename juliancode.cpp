@@ -97,10 +97,6 @@ int main()
     gold.hitboxes();
     gold2.hitboxes();
 
-
-
-
-
 	while (window.isOpen())
 	{
     	sf::Event event;
