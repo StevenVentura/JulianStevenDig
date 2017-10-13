@@ -19,7 +19,10 @@ void doAnimationStuff(int);
 void drawHUD();
 float boolpol(bool);
 
-float moveSpeed = 10;
+
+
+float moveSpeed = 1;
+
 
 float speedX = 0;
 float speedY = 0;
@@ -120,55 +123,45 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
 
-                steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed*1.5;
+                steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
                 steven.snapY();
-                if(steven.recenter == true)
-                {
-                    steven.speedX = moveSpeed;
-                    steven.setFacing(Direction::EAST);
-                }
+
+                steven.speedX = moveSpeed;
+
+                steven.setFacing(Direction::EAST);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
 
-                steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed*1.5;
+                 steven.speedY = boolpol(steven.pointedUpLast==false) * moveSpeed * 2;
                 steven.snapY();
-
-                if(steven.recenter == true)
-                {
                 steven.speedX = -moveSpeed;
+
                 steven.setFacing(Direction::WEST);
-                }
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                steven.pointedUpLast=true;
-                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed*1.5;
+    steven.pointedUpLast=true;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
                 steven.snapX();
 
-                if(steven.recenter2 == true)
-                {
                 steven.speedY = -moveSpeed;
                 steven.setFacing(Direction::NORTH);
-                }
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                steven.pointedUpLast=false;
-                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed*1.5;
+steven.pointedUpLast=false;
+                steven.speedX = boolpol(steven.facingLeft==false) * moveSpeed * 2;
                 steven.snapX();
 
-                if(steven.recenter2 == true)
-                {
                 steven.speedY = moveSpeed;
                 steven.setFacing(Direction::SOUTH);
-                }
             }
 
             //now actually move him
-        gold.doIntersectionCheck(steven,time);
+gold.doIntersectionCheck(steven,time);
     	gold2.doIntersectionCheck(steven,time);
-            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /100, steven.speedY/3 * time.asMilliseconds() / 100));
+            steven.sprite.move(sf::Vector2f(steven.speedX/3 * time.asMilliseconds() /10, steven.speedY/3 * time.asMilliseconds() / 10));
 
     	//update his position variables
     	steven.x = steven.sprite.getPosition().x;
@@ -180,6 +173,8 @@ int main()
     	doAnimationStuff(time.asMilliseconds());
 
     	clock.restart().asMilliseconds();
+
+
 
     	window.clear();
 
