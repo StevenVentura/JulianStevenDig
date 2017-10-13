@@ -25,10 +25,6 @@ int spriteCycleSpeed;
 int spriteCycleCounter;
 int currentSprite;
 int facingDirection;
-
-int recenter = true;
-int recenter2 = true;
-
 bool facingLeft;
 bool pointedUpLast;
 float speedX, speedY;
