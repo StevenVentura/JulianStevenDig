@@ -483,6 +483,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1502083669 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
 =======
 1504296232 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
@@ -490,6 +491,9 @@
 =======
 1504296232 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
 >>>>>>> parent of 00a2837... Nothing changed
+=======
+1502083669 source:c:\users\jacqueline\desktop\newcode\julianstevendig\juliancode.cpp
+>>>>>>> parent of aa6fd33... Merge pull request #2 from StevenVentura/stevenMakingGrid
 	"SFML/Graphics.hpp"
 	"SFML/Audio.hpp"
 	<cmath>
