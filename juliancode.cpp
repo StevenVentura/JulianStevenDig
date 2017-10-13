@@ -11,6 +11,8 @@
 #include "Direction.h"
 #include "FileHelper.h"
 
+//Testing something
+
 using namespace std;
 
 
@@ -110,7 +112,7 @@ int main()
     	}
 
     	sf::Time time = clock.getElapsedTime();
-
+Cr1t1kal
     	steven.lx = steven.x;
     	steven.ly = steven.y;
 
